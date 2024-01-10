@@ -1,2 +1,2 @@
 # obitasks
-A personal Task Manager
+A simple  yet web app that serves as a personal task manager.
