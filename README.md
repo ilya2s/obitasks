@@ -17,7 +17,7 @@ Clone this repo and open it in vscode.
 - In the overview page goto Database (Left menu) then Click connect
 ![image](https://github.com/ilya2s/obitasks/assets/42526358/2440d57b-a829-4a7a-b8ba-7a8cf03b46d4)
 - Select MongoDB for VScode
-- copy the connection string provided : `mongodb+srv://<username>:<password>@cluster0.htkorea.mongodb.net/` Replace *<password>* by your password from above.
+- copy the connection string provided : `mongodb+srv://<username>:<password>@cluster0.htkorea.mongodb.net/` Replace **<password>** by your password from above.
 
 ### Add URI to vscode
 - In the project, goto the server directory and create a new file called `.env`
