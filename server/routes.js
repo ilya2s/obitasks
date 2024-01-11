@@ -9,7 +9,9 @@ router.post(endpoint, async (request, response) => {
     const collection = getCollection();
     let { task } = request.body;
 
-    task = JSON.stringify(task);    // Make sure it's always a string
+    if (!task) return response.status(400).json({ "message": "Error: No task found" });
+
+    task = (typeof task == "string") ? task : JSON.stringify(task);    
 
     // Status for complete (true) / incomplete (false)
     const newTask = await collection.insertOne({ task, status: false });
@@ -29,14 +31,12 @@ router.get(endpoint, async (request, response) => {
 router.put(`${endpoint}/:id`, async (request, response) => {
     const collection = getCollection();
     const _id = new ObjectId(request.params.id);
-    let { task, status } = request.body; 
-
-    task = JSON.stringify(task);
+    let { status } = request.body; 
 
     if (typeof status !== "boolean")
         return response.status(400).json({ "message": "Invalid Status" });
 
-    const updatedTask = await collection.updateOne({ _id }, { $set: { task, status: !status } });
+    const updatedTask = await collection.updateOne({ _id }, { $set: { status: !status } });
     response.status(200).json(updatedTask);
 });
 
