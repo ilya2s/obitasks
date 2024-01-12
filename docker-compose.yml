@@ -8,6 +8,10 @@ services:
         volumes:
             - ./client:/app
             - /app/node_modules
+        depends_on:
+            - server
+        networks:
+            - app-network
         stdin_open: true
         tty: true
     server:
@@ -19,4 +23,27 @@ services:
         volumes:
             - ./server:/app
             - /app/node_modules/
+        depends_on:
+            - mongo
         env_file: ./server/.env
+        environment:
+            - NODE_ENV=production
+        networks:
+            - app-network
+        mongo:
+            image: mongo
+            volumes:
+                - data-volume:/data/db
+            ports:
+                - "27017:27017"
+            networks:
+                - app-network
+networks:
+  app-network:
+    driver: bride
+
+volumes:
+    data-volume:
+    node_modules:
+    web-root:
+        driver: local
