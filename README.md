@@ -31,7 +31,6 @@ Make sure you go to Security -> Network Access -> Add IP Address -> Allow Access
 MONGODB_URI=YOUR_CONNECTION_STRING
 PORT=5000
 ```
-- save
 
 ### Run Docker-compose
 Run the following commands (make sure you're in the project root directory):
