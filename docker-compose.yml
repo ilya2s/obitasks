@@ -19,6 +19,4 @@ services:
         volumes:
             - ./server:/app
             - /app/node_modules/
-        depends_on:
-            - mongo
         env_file: ./server/.env
