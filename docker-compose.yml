@@ -40,7 +40,6 @@ services:
             - app-network
 networks:
   app-network:
-    driver: bride
 
 volumes:
     data-volume:
