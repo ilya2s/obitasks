@@ -19,6 +19,11 @@ Clone this repo and open it in vscode.
 - Select MongoDB for VScode
 - copy the connection string provided : `mongodb+srv://<username>:<password>@cluster0.htkorea.mongodb.net/` Replace **\<password\>** by your password from above.
 
+### Allow acces from anywhere
+Make sure you go to Security -> Network Access -> Add IP Address -> Allow Access from anywhere.
+![image](https://github.com/ilya2s/obitasks/assets/42526358/e84109c8-0c06-4940-a9b0-2b5fd9a85fed)
+
+
 ### Add URI to vscode
 - In the project, goto the server directory and create a new file called `.env`
 - Add these lines to the file:
@@ -27,4 +32,11 @@ MONGODB_URI=YOUR_CONNECTION_STRING
 PORT=5000
 ```
 - save
-- in a terminal run `npm start`
+
+### Run Docker-compose
+Run the following commands (make sure you're in the project root directory):
+```
+docker-compose build
+docker-compose up
+```
+The application will be running in `localhost:5000`. You can stop it by running `docker-compose stop`
