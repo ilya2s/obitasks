@@ -1,8 +1,10 @@
 # obitasks
 A simple  yet web app that serves as a personal task manager.
 
-## How to run
+### Checkout progess done after the Coderbyte time limit
+Don't forget to checkout the branch **`after`**!
 
+## How to run
 ### Clone & open
 Clone this repo and open it in vscode.
 
