@@ -1,6 +1,8 @@
 # obitasks
 A simple  yet web app that serves as a personal task manager.
 
+You can **create** a task, **modify** it by clicking it's text, mark it as complete, and **delete** it. The App lists all your created tasks. 
+
 ## How to run
 
 ### Clone & open
