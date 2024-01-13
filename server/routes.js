@@ -40,6 +40,20 @@ router.put(`${endpoint}/:id`, async (request, response) => {
     response.status(200).json(updatedTask);
 });
 
+// PATCH /tasks/:id (UPDATE text only)
+router.patch(`${endpoint}/:id`, async (request, response) => {
+    const collection = getCollection();
+    const _id = new ObjectId(request.params.id);
+    let {task } = request.body;
+
+    if (!task) return response.status(400).json({ "message": "Error: No task found" });
+
+    task = (typeof task == "string") ? task : JSON.stringify(task);
+
+    const updatedTask = await collection.updateOne({ _id }, { $set: { task } });
+    response.status(200).json(updatedTask);
+});
+
 // DELETE /tasks/:id  (DELETE)
 router.delete(`${endpoint}/:id`, async (request, response) => {
     const collection = getCollection();

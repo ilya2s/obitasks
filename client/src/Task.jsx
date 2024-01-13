@@ -1,3 +1,5 @@
+import EditableText from "./EditableText";
+
 function Task(props) {
     const { task, setTasks, url } =  props;
 
@@ -23,6 +25,29 @@ function Task(props) {
         }
     };
 
+    const updateTaskText = async (id, updatedText) => {
+        const response = await fetch(`${url}/${id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSON.stringify({ task : updatedText }),
+        });
+
+        const json = await response.json();
+
+        if (json.acknowledged) {
+            setTasks(currentTask => {
+              return currentTask.map((currentTask) => {
+                if (currentTask._id === id) {
+                    return { ...currentTask, task: updateTask };
+                }
+                return currentTask;
+              });
+            });
+        }
+    };
+
     const deleteTask = async (taskId) => {
         const response = await fetch(`${url}/${taskId}`, {
             method: "DELETE"
@@ -38,7 +63,11 @@ function Task(props) {
 
     return(
         <div className="task">
-            <p>{task.task}</p>
+            <EditableText
+                task={task}
+                initialText={task.task}
+                updateTaskText={updateTaskText}
+            />
             <div className="mutations">
                 <button
                     className="task_status"
