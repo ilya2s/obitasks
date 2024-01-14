@@ -3,7 +3,7 @@ require("dotenv").config();
 const { connectToMongoDB } = require("./database");
 const express = require("express");
 const app = express();
-const router = require("./routes");
+const router = require("./routes/tasksRoute");
 const path = require('path');
 const port = process.env.PORT || 5000;
 
