@@ -1,5 +1,5 @@
 const express = require("express");
-const { getTasksCollection } = require("../models/taksModel");
+const { getTasksCollection } = require("../models/taskModel");
 const { ObjectId } = require("mongodb");
 
 // Create a new task
