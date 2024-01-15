@@ -21,7 +21,7 @@ app.get("/", (request, response) => {
 });
 
 app.use("/api", taskRouter);
-app.use("/auth", authRouter);
+app.use("/", authRouter);
 
 const startServer = async () => {
     await connectToMongoDB();
