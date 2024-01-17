@@ -3,7 +3,7 @@ const { connectToMongoDB } = require("./database");
 
 const cookieParser = require("cookie-parser");
 const express = require("express");
-
+const cors = require("cors");
 
 const taskRouter = require("./routes/tasksRoute");
 const authRouter = require("./routes/authRoute");
@@ -14,6 +14,11 @@ const port = process.env.PORT || 5000;
 const app = express();
 
 app.use(cookieParser());
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+    optionsSuccessStatus:200
+}));
 app.use(express.json());    // to be able to read json object sent to server
 app.use(express.static(path.join(__dirname, 'build')));
 app.get("/", (request, response) => {

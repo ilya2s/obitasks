@@ -32,6 +32,7 @@ module.exports.signup = async (request, response) => {
 
         response.status(201).json({
             message: "User signed up successfully",
+            success: true,
             user
         });
     } catch (error) {
@@ -48,7 +49,7 @@ module.exports.login = async (request, response) => {
             return response.json({ message: "All fields are required!" });
 
         const user = await collection.findOne({ username });
-        if (!username)
+        if (!user)
             return response.json({
                 message: "Incorrect username or password"
             });

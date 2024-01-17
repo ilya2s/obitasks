@@ -6,6 +6,7 @@ module.exports.userVerification = (request, response) => {
     const collection = getUsersCollection();
 
     const token = request.cookies.token;
+    
     if (!token) return response.json({ status: false });
 
     jwt.verify(token, process.env.TOKEN_KEY, async (error, data) => {

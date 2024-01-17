@@ -1,0 +1,24 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const Signup = () => {
+    const navigate = useNavigate();
+    const [input, setInput] = useState({
+        username: "",
+        password: "",
+    });
+    const [username, password] = input;
+    
+    const handleOnChange = (event) => {
+    };
+
+    return(
+        <div className="form_container">
+            <h2>Signup Account</h2>
+            <form onSubmi
+        </div>
+    );
+
+};
+
+export default Signup;
