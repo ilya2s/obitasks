@@ -3,6 +3,7 @@ const { getUsersCollection } = require("../models/userModel");
 const { createSecretToken } = require("../util/secretToken");
 const bcrypt = require("bcryptjs");
 
+
 // Signup a user
 module.exports.signup = async (request, response) => {
     try {
@@ -22,7 +23,10 @@ module.exports.signup = async (request, response) => {
                 message: "Invalid username or password"
             })
 
-        const user = await collection.insertOne({ username, password, createdAt });
+        await collection.insertOne({ username, password, createdAt });
+
+        const user = await collection.findOne({ username });
+
         const token = createSecretToken(user._id);
 
         response.cookie("token", token, {
@@ -39,6 +43,7 @@ module.exports.signup = async (request, response) => {
         console.log(error);
     }
 };
+
 
 module.exports.login = async (request, response) => {
     try{
