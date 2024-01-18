@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import Task from "../Task";
 
 const URL = "/api/tasks";
@@ -13,32 +13,6 @@ const Home = () => {
     const [username, setUsername] = useState("");
     const [tasks, setTasks] = useState([]);
     const [content, setContent] = useState("");
-    
-    useEffect(() => {
-        const verifyCookie = async () => {
-            if (!cookies.token) {
-                navigate("/login");
-            }
-
-            const { data } = await axios.post(
-                "http://localhost:5000",
-                {},
-                { withCredentials: true }
-            );
-
-            console.log(`DATA IS HERE ====> ${data}`);
-
-            const { status, user } = data;
-            
-            setUsername(user);
-
-            return status ?
-                toast(`Hello ${user}`, {
-                    position: "top-right",
-                }) : (removeCookie("token"), navigate("/login"));
-        };
-        verifyCookie();
-    }, [cookies, navigate, removeCookie]);
 
     useEffect(() => { 
         const getTasks = async () => {
@@ -70,8 +44,42 @@ const Home = () => {
         }
     };
 
+    useEffect(() => {
+        const verifyCookie = async () => {
+
+            if (cookies.token === 'undefined') {
+                navigate("/login");
+            }
+
+            const { data } = await axios.post(
+                "",
+                {},
+                { withCredentials: true }
+            );
+
+            const { status, user } = data;
+            setUsername(user);
+            return status ? toast(`Hello ${user} 👋`, {
+                position: "top-right",
+            }): (removeCookie("token"), navigate("/login"));
+        
+        };
+        verifyCookie();
+    }, [cookies, navigate, removeCookie]);
+
+    const Logout = () => {
+        removeCookie("token");
+        navigate("/login");
+    };
+
+
     return(
         <main className="container">
+            <h4>
+                {" "}
+                Welcome <span>{username}</span>
+            </h4>
+            <button onClick={Logout}>LOGOUT</button>
             <h1 className="title">Obitasks</h1>
             <form className="form" onSubmit={createNewTask}>
                 <input
@@ -91,6 +99,7 @@ const Home = () => {
                     ))
                 }
             </div>
+            <ToastContainer />
         </main>
     );
 };
