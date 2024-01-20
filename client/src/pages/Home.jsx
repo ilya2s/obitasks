@@ -11,19 +11,21 @@ const Home = () => {
     const navigate = useNavigate();
     const [cookies, removeCookie] = useCookies([]);
     const [username, setUsername] = useState("");
+    const [userId, setUserId] = useState("");
     const [tasks, setTasks] = useState([]);
     const [content, setContent] = useState("");
 
     useEffect(() => { 
         const getTasks = async () => {
-            const response = await fetch(URL);
+            const response = await fetch(`${URL}?user=${userId}`, {
+                method: "GET" });
             const tasks = await response.json();
 
             setTasks(tasks);
         };
 
         getTasks();
-    }, []);
+    }, [userId]);
 
     const createNewTask = async (event) => {
         event.preventDefault();
@@ -31,7 +33,10 @@ const Home = () => {
         if (content.length > 3) {   // Only submit if task has more than 3 chars
             const response = await fetch(URL, {
                 method: "POST",
-                body: JSON.stringify({ task: content }),
+                body: JSON.stringify({
+                    userId: userId,  
+                    task: content
+                }),
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -57,9 +62,11 @@ const Home = () => {
                 { withCredentials: true }
             );
 
-            const { status, user } = data;
-            setUsername(user);
-            return status ? toast(`Hello ${user} 👋`, {
+            const { status, username, id } = data;
+
+            setUsername(username);
+            setUserId(id);
+            return status ? toast(`Hello ${username} 👋`, {
                 position: "top-right",
             }): (removeCookie("token"), navigate("/login"));
         

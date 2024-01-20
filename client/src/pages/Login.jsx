@@ -55,7 +55,6 @@ const Login = () => {
                 setTimeout(() => {
                     navigate("/");
                 }, 1000);
-                console.log(data);
             } else {
                 handleError(message);
             }

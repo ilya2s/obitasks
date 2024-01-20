@@ -18,6 +18,10 @@ module.exports.userVerification = (request, response) => {
         const user = await collection.findOne({ _id });
         if (!user) return response.json({ status: false });
 
-        return response.json({ status: true, user: user.username });
+        return response.json({
+            status: true,
+            username: user.username,
+            id: user._id
+        });
     });
 };

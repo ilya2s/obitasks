@@ -23,7 +23,11 @@ module.exports.signup = async (request, response) => {
                 message: "Invalid username or password"
             })
 
-        await collection.insertOne({ username, password, createdAt });
+        await collection.insertOne({
+            username,
+            password,
+            createdAt,
+        });
 
         const user = await collection.findOne({ username });
 
