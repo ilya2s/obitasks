@@ -34,6 +34,13 @@ MONGODB_URI=YOUR_CONNECTION_STRING
 PORT=5000
 ```
 
+### Add Base URL to client
+- In the project, goto the `client` directory and create new file called `.env`
+- Add this line to the file:
+```
+BASE_URL=http://localhost:5000
+```
+
 ### Run Docker-compose
 Run the following commands (make sure you're in the project root directory):
 ```
