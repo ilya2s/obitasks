@@ -32,6 +32,7 @@ Make sure you go to Security -> Network Access -> Add IP Address -> Allow Access
 ```
 MONGODB_URI=YOUR_CONNECTION_STRING
 PORT=5000
+TOKEN_KEY=Secret
 ```
 
 ### Add Base URL to client
