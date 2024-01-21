@@ -97,7 +97,7 @@ const Home = () => {
                     className="form_input"
                     required
                 />
-                <button type="submit">Create Task</button>
+                <button className="submit" type="submit">Create Task</button>
             </form>
             <div className="tasks">
                 { (tasks.length > 0) &&
